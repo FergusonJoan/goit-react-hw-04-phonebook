@@ -15,18 +15,15 @@ const initState = [
 
 export const App = () => {
   const [contacts, setContacts] = useState(
-    JSON.parse(localStorage.getItem('contacts')) ?? initState
+    () => JSON.parse(localStorage.getItem('contacts')) ?? initState
   );
   const [filter, setFilter] = useState('');
 
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-    }
-    localStorage.setItem('contacts', JSON.stringify(contacts) ?? initState);
-  }, [isFirstRender, contacts]);
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   const formSubmit = contact => {
     const isExist = contacts.some(
