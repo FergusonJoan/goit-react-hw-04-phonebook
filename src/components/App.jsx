@@ -42,9 +42,10 @@ export const App = () => {
       });
       return;
     }
-    contacts(prevState => ({
-      contacts: [...prevState.contacts, { id: nanoid(), ...contact }],
-    }));
+    setContacts(prevContacts => [
+      ...prevContacts,
+      { id: nanoid(), ...contact },
+    ]);
     toast.success('Контакт успешно добавлен!', {
       position: 'top-left',
       autoClose: 2000,
@@ -57,7 +58,9 @@ export const App = () => {
     });
   };
   const clearContact = idContact => {
-    setContacts(contacts.filter(contact => contact.id !== idContact));
+    setContacts(prevContacts =>
+      prevContacts.filter(contact => contact.id !== idContact)
+    );
   };
   const onChangeFilter = e => {
     setFilter(e.currentTarget.value);
