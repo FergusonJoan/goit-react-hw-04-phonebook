@@ -19,8 +19,6 @@ export const App = () => {
   );
   const [filter, setFilter] = useState('');
 
-  const isFirstRender = useRef(true);
-
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
